@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pickdate_outer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    android:layout_margin="0dp">
+
+    <LinearLayout
+        android:id="@+id/pickdate_inner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:padding="0dp"
+        tools:ignore="UselessParent">
+        <LinearLayout
+            android:id="@+id/pickdate_datedisplaylayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+            <TextView
+                android:id="@+id/pickdate_datedisplaytext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/pickdate_adjustbuttonslayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/month_subtract"
+                style="@style/pickdate_adjustbutton"
+                android:onClick="subtractMonth"
+                android:text="@string/pickdate_subtractmonthbuttontext" />
+
+            <Button
+                android:id="@+id/month_add"
+                style="@style/pickdate_adjustbutton"
+                android:onClick="addMonth"
+                android:text="@string/pickdate_addmonthbuttontext" />
+
+            <Button
+                android:id="@+id/year_subtract"
+                style="@style/pickdate_adjustbutton"
+                android:onClick="subtractYear"
+                android:text="@string/pickdate_substractyearbuttontext" />
+
+            <Button
+                android:id="@+id/year_add"
+                style="@style/pickdate_adjustbutton"
+                android:onClick="addYear"
+                android:text="@string/pickdate_addyearbuttontext" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pickdate_columnheaders"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5">
+            <TextView
+                android:id="@+id/pickdate_c1hdr"
+                style="@style/pickdate_dategridcolumnheader"
+                android:text="@string/pickdate_monday" />
+
+            <TextView
+                android:id="@+id/pickdate_c2hdr"
+                style="@style/pickdate_dategridcolumnheader"
+                android:text="@string/pickdate_tuesday" />
+
+            <TextView
+                android:id="@+id/pickdate_c3hdr"
+                style="@style/pickdate_dategridcolumnheader"
+                android:text="@string/pickdate_wednesday" />
+
+            <TextView
+                android:id="@+id/pickdate_c4hdr"
+                style="@style/pickdate_dategridcolumnheader"
+                android:text="@string/pickdate_thursday" />
+
+            <TextView
+                android:id="@+id/pickdate_c5hdr"
+                style="@style/pickdate_dategridcolumnheader"
+                android:text="@string/pickdate_friday" />
+
+            <TextView
+                android:id="@+id/pickdate_c6hdr"
+                style="@style/pickdate_dategridcolumnheader"
+                android:text="@string/pickdate_saturday" />
+
+            <TextView
+                android:id="@+id/pickdate_c7hdr"
+                style="@style/pickdate_dategridcolumnheader"
+                android:text="@string/pickdate_sunday" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pickdate_r1"
+            style="@style/pickdate_daterow">
+
+            <TextView
+                android:id="@+id/pickdate_r1c1"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r1c2"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r1c3"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r1c4"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r1c5"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r1c6"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r1c7"
+                style="@style/pickdate_cell" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pickdate_r2"
+            style="@style/pickdate_daterow">
+
+            <TextView
+                android:id="@+id/pickdate_r2c1"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r2c2"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r2c3"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r2c4"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r2c5"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r2c6"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r2c7"
+                style="@style/pickdate_cell" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pickdate_r3"
+            style="@style/pickdate_daterow">
+
+            <TextView
+                android:id="@+id/pickdate_r3c1"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r3c2"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r3c3"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r3c4"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r3c5"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r3c6"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r3c7"
+                style="@style/pickdate_cell" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pickdate_r4"
+            style="@style/pickdate_daterow">
+
+            <TextView
+                android:id="@+id/pickdate_r4c1"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r4c2"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r4c3"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r4c4"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r4c5"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r4c6"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r4c7"
+                style="@style/pickdate_cell" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pickdate_r5"
+            style="@style/pickdate_daterow">
+
+            <TextView
+                android:id="@+id/pickdate_r5c1"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r5c2"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r5c3"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r5c4"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r5c5"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r5c6"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r5c7"
+                style="@style/pickdate_cell" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pickdate_r6"
+            style="@style/pickdate_daterow">
+
+            <TextView
+                android:id="@+id/pickdate_r6c1"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r6c2"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r6c3"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r6c4"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r6c5"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r6c6"
+                style="@style/pickdate_cell" />
+
+            <TextView
+                android:id="@+id/pickdate_r6c7"
+                style="@style/pickdate_cell" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pickdate_okbutton_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/pickdate_okbutton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:onClick="okbuttonclick"
+                android:padding="0dp"
+                android:text="@string/pickdate_okbuttontext"
+                android:textColor="@color/colorBlack" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:xlmns="http://schemas.android.com/apk/res/android">
+    <item xlmns:id="@+id/normalcellborder">
+        <shape xlmns:shape="rectangle">
+            <stroke xlmns:width="0dp"/>
+        </shape>
+    </item>
+</layer-list>
