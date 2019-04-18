@@ -27,8 +27,23 @@
         <TextView
             android:id="@+id/shoppinglist_shopcity"
             style="@style/listviewrowcol_standard"
-            android:layout_weight="74"
+            android:layout_weight="24"
             />
+        <TextView
+            android:id="@+id/shoppinglist_shoptotal"
+            style="@style/listview_heading_col_monetary"
+            android:layout_weight="16"/>
+        <TextView
+            android:id="@+id/shoppinglist_shopremaining"
+            style="@style/listview_heading_col_monetary"
+            android:layout_weight="16"/>
+        <TextView
+            android:id="@+id/shoppinglist_shopspent"
+            style="@style/listview_heading_col_monetary"
+            android:layout_weight="16"/>
+        <TextView
+            style="@style/listview_heading_col_standard"
+            android:layout_weight="2"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/shoppinglist_aisleinfo_linearlayout"

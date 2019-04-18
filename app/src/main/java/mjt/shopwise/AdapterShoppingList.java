@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
-import android.os.Build;
-import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +25,8 @@ public class AdapterShoppingList extends CursorAdapter {
     private final Intent callerintent;
     private final Context ctxt;
     private Cursor cursor;
+    DBShopListMethods dbShopListMethods;
+    //TRPLDBL mShopLevelValues = new TRPLDBL();
 
     @SuppressWarnings("unused")
     private int shoplist_productref_offset = 0;
@@ -93,6 +93,7 @@ public class AdapterShoppingList extends CursorAdapter {
         white = ContextCompat.getColor(ctxt,R.color.colorWhite);
         TextView dummy = new TextView(ctxt);
         defaultcolor = dummy.getTextColors();
+        dbShopListMethods = new DBShopListMethods(ctxt);
     }
 
     @Override
@@ -151,6 +152,7 @@ public class AdapterShoppingList extends CursorAdapter {
         //  As such, the previous row is checked
         shopinfo.setVisibility(View.VISIBLE);
         aisleinfo.setVisibility(View.VISIBLE);
+
         if (position > 0) {
             long thisshopid = csr.getLong(aisle_shopref_offset);
             long thisaisled = csr.getLong(shoplist_aisleref_offset);
@@ -196,6 +198,9 @@ public class AdapterShoppingList extends CursorAdapter {
         TextView boughtbutton = view.findViewById(R.id.shoppinglist_boughtbutton);
         TextView adjustbutton = view.findViewById(R.id.shoppinglist_adjustbutton);
         TextView deletebutton = view.findViewById(R.id.shoppinglist_deletetbutton);
+        TextView shoptotal = view.findViewById(R.id.shoppinglist_shoptotal);
+        TextView shopremainng = view.findViewById(R.id.shoppinglist_shopremaining);
+        TextView shopspent = view.findViewById(R.id.shoppinglist_shopspent);
         //noinspection unused
         LinearLayout shopinfo = view.findViewById(R.id.shoppinglist_shopinfo_linearlayout);
         //noinspection unused
@@ -214,6 +219,11 @@ public class AdapterShoppingList extends CursorAdapter {
         int numberrequired = csr.getInt(shoplist_numbertoget_offset) - csr.getInt(shoplist_done_offset);
         numbertoget.setText(Integer.toString(numberrequired));
         totalcost.setText(NumberFormat.getCurrencyInstance().format(csr.getDouble(calculated_totalcost_offset)));
+
+        TRPLDBL shoplevel = dbShopListMethods.getTotals(DBShopsTableConstants.SHOPS_ID_COL_FULL + "=" + String.valueOf(csr.getLong(aisle_shopref_offset)));
+        shoptotal.setText(NumberFormat.getCurrencyInstance().format((shoplevel.getdbl1())));
+        shopremainng.setText(NumberFormat.getCurrencyInstance().format((shoplevel.getdbl2())));
+        shopspent.setText(NumberFormat.getCurrencyInstance().format((shoplevel.getdbl3())));
 
         // Checkoff if numbertoget is 0
         if (numberrequired < 1 ) {

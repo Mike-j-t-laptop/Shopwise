@@ -229,7 +229,7 @@ public class DBShopListMethods {
                 SQLSELECT +
                 "("+
                 // (shoplistnumbertoget * shoplistcost) AS totalcost,
-                DBShopListTableConstants.SHOPLIST_NUMBERTOGET_COL_FULL + " *+ " +
+                DBShopListTableConstants.SHOPLIST_NUMBERTOGET_COL_FULL + " * " +
                 DBProductusageTableConstants.PRODUCTUSAGE_COST_FULL +
                 ")" +
                 SQLAS + DBShopListTableConstants.TOTALCOST + ", " +
