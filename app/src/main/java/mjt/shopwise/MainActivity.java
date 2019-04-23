@@ -10,12 +10,15 @@ import android.media.ToneGenerator;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import static mjt.shopwise.StandardAppConstants.*;
 import static mjt.shopwise.SQLKWORD.*;
@@ -105,6 +108,11 @@ public class MainActivity extends AppCompatActivity {
         dbrulemethods = new DBRuleMethods(this);
         dbshoplistmethods = new DBShopListMethods(this);
         dbstoragemethods = new DBStorageMethods(this);
+
+        //TODO Currently experimenting with Referential Integrity Check
+        for (String s :DBCommonMethods.checkReferentialIntegrity(dbdao.getDb())) {
+            Log.d("REFITEGRITYCHECK",s);
+        }
 
         // Expand the database
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,
