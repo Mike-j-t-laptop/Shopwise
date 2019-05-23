@@ -65,7 +65,6 @@ public class BackupActivity extends AppCompatActivity implements BackupActivityI
     @SuppressWarnings("unused")
     int passedmenucolorcode;
 
-
     TextView messagebar;
     TextView donebutton;
     TextView directory;

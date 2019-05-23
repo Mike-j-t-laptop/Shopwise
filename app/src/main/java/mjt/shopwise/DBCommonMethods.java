@@ -262,7 +262,7 @@ public class DBCommonMethods {
             }
         } else {
             rv.clear();
-            rv.add("It appears that the referential integrity check return no rows. Inform the ShopWise developer of the issue");
+            rv.add("It appears that the referential integrity check return no rows. Please notify the ShopWise developer of the issue");
         }
         return rv;
     }
