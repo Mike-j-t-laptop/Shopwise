@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     private static int resumestate = StandardAppConstants.RESUMSTATE_NORMAL;
 
     /*
-    Note LogMsg will only log msg if a) devmode is true and b)
+    Note LogMsg will only log msg if a) dev-mode is true and b)
     if the relevant section is set to true.
     This is accomplished by changing the values in
     StandardAppConstants.
