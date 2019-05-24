@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("REFITEGRITYCHECK",s);
         }
 
-        // Expand the database
+        // Expand (alter the schema) the database
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,
                 "Expanding Database (if required)", this, methodname);
         db.expand(null, true);
