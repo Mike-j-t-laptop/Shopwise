@@ -18,8 +18,6 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import static mjt.shopwise.StandardAppConstants.*;
 import static mjt.shopwise.SQLKWORD.*;
 
@@ -432,7 +430,7 @@ public class MainActivity extends AppCompatActivity {
                     ordermatch = true;
                 }
             }
-            // comparisons done so act accordingly
+            // comparisons done to act accordingly
             // skip to next if both match or only the option mismatches
             // (latter cases means the notes are for another option))
             if ((optionmatch && notesmatch && ordermatch) || (!optionmatch && notesmatch &&ordermatch)) {
@@ -565,7 +563,7 @@ public class MainActivity extends AppCompatActivity {
     /**************************************************************************
      * actionButtonClick - Take the appropriate action when an action button is
      * touched/clicked
-     * Curenttly the same activity is invoked however the position is passed
+     * Currently the same activity is invoked however the position is passed
      *
      * @param view the view (TextView acting as Button)that was clicked
      */
