@@ -220,7 +220,7 @@ public class AdapterShoppingList extends CursorAdapter {
         numbertoget.setText(Integer.toString(numberrequired));
         totalcost.setText(NumberFormat.getCurrencyInstance().format(csr.getDouble(calculated_totalcost_offset)));
 
-        TRPLDBL shoplevel = dbShopListMethods.getTotals(DBShopsTableConstants.SHOPS_ID_COL_FULL + "=" + String.valueOf(csr.getLong(aisle_shopref_offset)));
+        TRPLDBL shoplevel = dbShopListMethods.getTotals(DBShopsTableConstants.SHOPS_ID_COL_FULL + "=" + csr.getLong(aisle_shopref_offset));
         shoptotal.setText(NumberFormat.getCurrencyInstance().format((shoplevel.getdbl1())));
         shopremainng.setText(NumberFormat.getCurrencyInstance().format((shoplevel.getdbl2())));
         shopspent.setText(NumberFormat.getCurrencyInstance().format((shoplevel.getdbl3())));

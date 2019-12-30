@@ -324,7 +324,7 @@ public class DBIndex {
 
         // Get the index's record from the sqlite master table to obtain the
         // actual index's CREATE SQL as recorded by sqlite
-        String columns[] = {SQLITEMASTERCOLUMN_NAME,
+        String[] columns = {SQLITEMASTERCOLUMN_NAME,
                 SQLITEMASTERCOLUMN_SQL};
         String where = SQLITEMASTERCOLUMN_TYPE +
                 "=?" +
@@ -466,9 +466,9 @@ public class DBIndex {
             if (this.columns.get(i).getDBColumnName().length() < 1) {
                 this.usable = false;
                 pmsg =  pmsg + "\nEDBI0011 - Invalid Column Name for Column(" +
-                        Integer.toString(i) +
+                        i +
                         " of " +
-                        Integer.toString(columns.size()) +
+                        columns.size() +
                         ")- " +
                             "Must be at least 1 character in length. ";
             }
@@ -508,9 +508,9 @@ public class DBIndex {
             this.problem_msg = this.problem_msg +
                     "\nEDBI013 - Mismatched Columns against Column Orders - " +
                     "The number of Columns(" +
-                    Integer.toString(this.columns.size()) +
+                    this.columns.size() +
                     ") must be the same as the number of Column Orders(" +
-                    Integer.toString(this.columnorders.size()) +
+                    this.columnorders.size() +
                     ")" +
                     "Caller = (" + caller + ")";
         }

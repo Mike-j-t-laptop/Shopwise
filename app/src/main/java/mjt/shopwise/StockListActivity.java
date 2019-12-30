@@ -344,24 +344,20 @@ public class StockListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuitem) {
         int menuitemid = menuitem.getItemId();
-        switch (menuitemid) {
-            case R.id.actionhelp:
-                //new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
-                new DisplayHelp(this,
-                        getResources().getString(
-                                R.string.title_help_stocklist_activity),
-                        R.array.help_stocklist_activty,
-                        85,
-                        true,
-                        primary_color,
-                        0xbbffffff,
-                        22f,
-                        16f,
-                        12
-                );
-                return true;
-            default:
-                break;
+        if (menuitemid == R.id.actionhelp) {//new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
+            new DisplayHelp(this,
+                    getResources().getString(
+                            R.string.title_help_stocklist_activity),
+                    R.array.help_stocklist_activty,
+                    85,
+                    true,
+                    primary_color,
+                    0xbbffffff,
+                    22f,
+                    16f,
+                    12
+            );
+            return true;
         }
         return  onOptionsItemSelected(menuitem);
     }
@@ -439,8 +435,8 @@ public class StockListActivity extends AppCompatActivity {
                 false
         );
         logmsg = "Deleted STOCK item AisleID=" +
-                Long.toString(values.getLong1()) +
-                " ProductID=" + Long.toString(values.getLong2());
+                values.getLong1() +
+                " ProductID=" + values.getLong2();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
     }
 
@@ -733,9 +729,9 @@ public class StockListActivity extends AppCompatActivity {
                 values.getLong2()
         );
         logmsg = "Starting " + StockEditActivity.class.getSimpleName() +
-                " for ShopID=" + Long.toString(values.getLong3()) +
-                " AisleID=" + Long.toString(values.getLong1()) +
-                " ProductID=" + Long.toString(values.getLong2());
+                " for ShopID=" + values.getLong3() +
+                " AisleID=" + values.getLong1() +
+                " ProductID=" + values.getLong2();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
         startActivity(intent);
     }

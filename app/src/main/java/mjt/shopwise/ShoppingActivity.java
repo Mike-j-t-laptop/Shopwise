@@ -299,7 +299,7 @@ public class ShoppingActivity extends AppCompatActivity {
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
         refreshDisplay();
         int autoadded = dbrulemethods.applyAutoAddRules();
-        String msg = Integer.toString(autoadded) +
+        String msg = autoadded +
                 " Shopping List Entries Added from Rules.";
         //Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
         setMessage(this,msg,false);
@@ -360,24 +360,20 @@ public class ShoppingActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuitem) {
         int menuitemid = menuitem.getItemId();
-        switch (menuitemid) {
-            case R.id.actionhelp:
-                //new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
-                new DisplayHelp(this,
-                        getResources().getString(
-                                R.string.title_help_shopping_activity),
-                        R.array.help_shopping_activty,
-                        85,
-                        true,
-                        primary_color,
-                        0xbbffffff,
-                        22f,
-                        16f,
-                        12
-                );
-                return true;
-            default:
-                break;
+        if (menuitemid == R.id.actionhelp) {//new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
+            new DisplayHelp(this,
+                    getResources().getString(
+                            R.string.title_help_shopping_activity),
+                    R.array.help_shopping_activty,
+                    85,
+                    true,
+                    primary_color,
+                    0xbbffffff,
+                    22f,
+                    16f,
+                    12
+            );
+            return true;
         }
         return  onOptionsItemSelected(menuitem);
     }
@@ -449,7 +445,7 @@ public class ShoppingActivity extends AppCompatActivity {
         }
         logmsg = "Preparing to invoke" +
                 PromptedRulesActivity.class.getSimpleName() +
-                " to process " + Integer.toString(palcsr.getCount()) +
+                " to process " + palcsr.getCount() +
                 " Prompted Rules" +
                 "\n\tNote!!!! may process more as dates are adjusted.";
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);

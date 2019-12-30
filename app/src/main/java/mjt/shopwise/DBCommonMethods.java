@@ -106,7 +106,7 @@ public class DBCommonMethods {
             sql = sql + SQLORDERBY + order;
         }
         if (limit > 0 ) {
-            sql = sql + SQLLIMIT + Integer.toString(limit);
+            sql = sql + SQLLIMIT + limit;
         }
         sql = sql + SQLENDSTATEMENT;
         return db.rawQuery(sql,null);
@@ -239,23 +239,23 @@ public class DBCommonMethods {
                 Cursor csr2;
                 rv.clear();
                 if (aisle_issue_count > 0) {
-                    rv.add("The " + DBAislesTableConstants.AISLES_TABLE + " has " + String.valueOf(aisle_issue_count) + " invalid references.");
+                    rv.add("The " + DBAislesTableConstants.AISLES_TABLE + " has " + aisle_issue_count + " invalid references.");
                     csr2 = db.rawQuery(qry_aisles,null);
                     rv.addAll(dumpCursorToStringSrrayList(csr2,DBAislesTableConstants.AISLES_TABLE));
 
                 }
                 if (product_issue_count > 0 ) {
-                    rv.add("The " + DBProductsTableConstants.PRODUCTS_TABLE + " has " + String.valueOf(product_issue_count) + " invalid references.");
+                    rv.add("The " + DBProductsTableConstants.PRODUCTS_TABLE + " has " + product_issue_count + " invalid references.");
                     csr2 = db.rawQuery(qry_products,null);
                     rv.addAll(dumpCursorToStringSrrayList(csr2,DBProductsTableConstants.PRODUCTS_TABLE));
                 }
                 if (rule_issues_count > 0 ) {
-                    rv.add("The " + DBRulesTableConstants.RULES_TABLE + " has " + String.valueOf(rule_issues_count) + " invalid references.");
+                    rv.add("The " + DBRulesTableConstants.RULES_TABLE + " has " + rule_issues_count + " invalid references.");
                     csr2 = db.rawQuery(qry_rules,null);
                     rv.addAll(dumpCursorToStringSrrayList(csr2,DBRulesTableConstants.RULES_TABLE));
                 }
                 if(shoplist_issues_count > 0) {
-                    rv.add("The " + DBShopListTableConstants.SHOPLIST_TABLE + " has " + String.valueOf(shoplist_issues_count) + " invalid references");
+                    rv.add("The " + DBShopListTableConstants.SHOPLIST_TABLE + " has " + shoplist_issues_count + " invalid references");
                     csr2 = db.rawQuery(qry_shoplist,null);
                     rv.addAll(dumpCursorToStringSrrayList(csr2,DBShopListTableConstants.SHOPLIST_TABLE));
                 }
@@ -273,7 +273,7 @@ public class DBCommonMethods {
         csr.moveToPosition(-1);
         rv.add("Table: " + tablename);
         while (csr.moveToNext()) {
-            rv.add("\tRow # " + String.valueOf(csr.getPosition() + 1));
+            rv.add("\tRow # " + (csr.getPosition() + 1));
             for (String column: csr.getColumnNames()) {
                 rv.add("\t\tColumn: " + column + "\tvalue is: \t" + csr.getString(csr.getColumnIndex(column)));
             }

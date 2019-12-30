@@ -43,7 +43,7 @@ public class CommonSQLiteUtilities {
         Cursor dblcsr = db.rawQuery(PRAGMA_STATEMENT + PRAGMA_DATABASELIST,null);
         // Write databases to the log
         while (dblcsr.moveToNext()) {
-            Log.d(CSU_TAG,"DatabaseList Row " + Integer.toString(dblcsr.getPosition() + 1) +
+            Log.d(CSU_TAG,"DatabaseList Row " + (dblcsr.getPosition() + 1) +
                     " Name=" + dblcsr.getString(dblcsr.getColumnIndex(PRAGMA_DBLIST_NAME_COL)) +
                     " File=" + dblcsr.getString(dblcsr.getColumnIndex(PRAGMA_DBLIST_FILE_COL))
             );
@@ -122,9 +122,7 @@ public class CommonSQLiteUtilities {
                                 ticsr.getString(ticsr.getColumnIndex(PRAGMA_TABLEINFO_TYPE_COL)) +
                                 " Default Value = " +
                                 ticsr.getString(ticsr.getColumnIndex(PRAGMA_TABLEINFO_DEFAULTVALUE_COL)) +
-                                " PRIMARY KEY SEQUENCE = " + Integer.toString(
-                        ticsr.getInt(ticsr.getColumnIndex(PRAGMA_TABLEINFO_PRIMARYKEY_COL))
-                        )
+                                " PRIMARY KEY SEQUENCE = " + ticsr.getInt(ticsr.getColumnIndex(PRAGMA_TABLEINFO_PRIMARYKEY_COL))
                 );
             }
             ticsr.close();
@@ -228,13 +226,13 @@ public class CommonSQLiteUtilities {
         Log.d(CSU_TAG,
                 new Object(){}.getClass().getEnclosingMethod().getName() +
                         " invoked. Cursor has the following " +
-                        Integer.toString(csr.getColumnCount())+
+                        csr.getColumnCount() +
                         " columns.");
         int position = 0;
         for (String column: csr.getColumnNames()) {
             position++;
             Log.d(CSU_TAG,"Column Name " +
-                    Integer.toString(position) +
+                    position +
                     " is "
                     + column
             );
@@ -252,7 +250,7 @@ public class CommonSQLiteUtilities {
         int csrpos = csr.getPosition(); //<<< added 20171016
         //sb.append(CSU_TAG);
         sb.append("Cursor has ");
-        sb.append(String.valueOf(rowcount));
+        sb.append(rowcount);
         sb.append(" rows and ");
         sb.append(columncount);
         sb.append(" Columns.");
@@ -273,9 +271,9 @@ public class CommonSQLiteUtilities {
             String unobtainable = "unobtainable!";
             //String logstr = "Information for row " + Integer.toString(csr.getPosition() + 1) + " offset=" + Integer.toString(csr.getPosition());
             sb.append("\nInformation for Row ");
-            sb.append(String.valueOf(csr.getPosition() + 1));
+            sb.append((csr.getPosition() + 1));
             sb.append(" offset = ");
-            sb.append(String.valueOf(csr.getPosition()));
+            sb.append(csr.getPosition());
 
             for (int i=0; i < columncount;i++) {
                 sb.append("\n\tFor Column ");
@@ -383,7 +381,7 @@ public class CommonSQLiteUtilities {
         StringBuilder sb = new StringBuilder();
         Cursor ticsr = db.rawQuery(PRAGMA_STATEMENT + PRAGMA_INDEXLIST + "(" + table + ")",null);
         sb.append("\nNumber of Indexes = ");
-        sb.append(String.valueOf(ticsr.getCount()));
+        sb.append(ticsr.getCount());
         String[] actual_columns = ticsr.getColumnNames();
         for (int i =0; i < expected_columns.length; i++) {
             boolean col_exists = false;
@@ -429,13 +427,11 @@ public class CommonSQLiteUtilities {
             if (unique_col) {
                 sb.append("\n\tUnique   = ");
                 sb.append(
-                        String.valueOf(
-                                ticsr.getInt(
-                                        ticsr.getColumnIndex(
-                                                PRAGMA_INDEXLIST_UNIQUE_COL
-                                        )
-                                ) > 0
-                        )
+                        (ticsr.getInt(
+                                ticsr.getColumnIndex(
+                                        PRAGMA_INDEXLIST_UNIQUE_COL
+                                )
+                        ) > 0)
                 );
             } else {
                 sb.append("\n\tIndex Unique indicator unsupported");
@@ -457,13 +453,11 @@ public class CommonSQLiteUtilities {
             if (partial_col) {
                 sb.append("\n\tFULL (else partial)");
                 sb.append(
-                        String.valueOf(
-                                ticsr.getInt(
-                                        ticsr.getColumnIndex(
-                                                PRAGMA_INDEXLIST_PARTIAL_COL
-                                        )
-                                ) > 0
-                        )
+                        (ticsr.getInt(
+                                ticsr.getColumnIndex(
+                                        PRAGMA_INDEXLIST_PARTIAL_COL
+                                )
+                        ) > 0)
                 );
             } else {
                 sb.append("\n\tIndex Partial indicator unsupported");
@@ -483,20 +477,16 @@ public class CommonSQLiteUtilities {
                 );
                 sb.append(" COLUMN ID = ");
                 sb.append(
-                        String.valueOf(
-                                csrx.getLong(
-                                        csrx.getColumnIndex(
-                                                PRAGMA_INDEXINFO_CID_COL)
-                                )
+                        csrx.getLong(
+                                csrx.getColumnIndex(
+                                        PRAGMA_INDEXINFO_CID_COL)
                         )
                 );
                 sb.append(" SEQUENCE = ");
                 sb.append(
-                        String.valueOf(
-                                csrx.getInt(
-                                        csrx.getColumnIndex(
-                                                PRAGMA_INDEXINFO_SEQNO_COL
-                                        )
+                        csrx.getInt(
+                                csrx.getColumnIndex(
+                                        PRAGMA_INDEXINFO_SEQNO_COL
                                 )
                         )
                 );
@@ -518,7 +508,7 @@ public class CommonSQLiteUtilities {
         StringBuilder sb = new StringBuilder();
         Cursor csr = db.rawQuery(PRAGMA_STATEMENT + PRAGMA_FOREIGNKEYLIST + "(" + table + ")",null);
         sb.append("\nNumber of Foreign Keys = ");
-        sb.append(String.valueOf(csr.getCount()));
+        sb.append(csr.getCount());
         while (csr.moveToNext()) {
             sb.append("\n\t");
             sb.append("Column ");
@@ -550,7 +540,7 @@ public class CommonSQLiteUtilities {
         String[] whereargs = new String[]{table};
         Cursor csr = db.rawQuery(sqlstr,whereargs);
         sb.append("\nNumber of Triggers = ");
-        sb.append(String.valueOf(csr.getCount()));
+        sb.append(csr.getCount());
         while (csr.moveToNext()) {
             sb.append("\n\tTRIGGER NAME = ");
             sb.append(csr.getString(csr.getColumnIndex(SM_NAME_COLUMN)));

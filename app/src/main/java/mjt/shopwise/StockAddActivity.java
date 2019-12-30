@@ -364,8 +364,8 @@ public class StockAddActivity extends AppCompatActivity {
         switch (calledmode) {
             case StandardAppConstants.CM_STOCKFROMSSHOP:
                 currentshopid = getIntent().getLongExtra(StandardAppConstants.INTENTKEY_SHOPID,0);
-                aislefilter = AISLESHOPREF_FULLCOLUMN + " = " + Long.toString(currentshopid);
-                logmsg = "Called from ShopID=" + Long.toString(currentshopid) +
+                aislefilter = AISLESHOPREF_FULLCOLUMN + " = " + currentshopid;
+                logmsg = "Called from ShopID=" + currentshopid +
                         " Aisle Filter=" + aislefilter;
                 LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
                 actionbar.setTitle(actionbar.getTitle().toString() + " - (from Shops)");
@@ -373,9 +373,9 @@ public class StockAddActivity extends AppCompatActivity {
             case StandardAppConstants.CM_STOCKFROMAISLE:
                 currentaisleid = getIntent().getLongExtra(StandardAppConstants.INTENTKEY_AISLEID,0);
                 currentshopid = getIntent().getLongExtra(StandardAppConstants.INTENTKEY_AISLESHOPREF,0);
-                aislefilter = AISLESHOPREF_FULLCOLUMN + " = " + Long.toString(currentshopid);
-                logmsg = "Called from AisleID=" + Long.toString(currentaisleid) +
-                        " with parent ShopID=" + Long.toString(currentshopid) +
+                aislefilter = AISLESHOPREF_FULLCOLUMN + " = " + currentshopid;
+                logmsg = "Called from AisleID=" + currentaisleid +
+                        " with parent ShopID=" + currentshopid +
                         "Aisle Filter=" + aislefilter;
                 LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
                 actionbar.setTitle(actionbar.getTitle().toString() + " - (from Aisles)");
@@ -385,13 +385,13 @@ public class StockAddActivity extends AppCompatActivity {
                 slcsr = dbshopmethods.getShopsWithAisles(shopfilter,shoporderby);
                 slcsr.moveToFirst();
                 currentshopid = slcsr.getLong(slcsr.getColumnIndex(SHOPID_COLUMN));
-                aislefilter = AISLESHOPREF_FULLCOLUMN + " = " + Long.toString(currentshopid);
+                aislefilter = AISLESHOPREF_FULLCOLUMN + " = " + currentshopid;
                 alcsr = dbaislemethods.getAisles(aislefilter,aisleorderby, false);
                 alcsr.moveToFirst();
                 currentaisleid = alcsr.getLong(alcsr.getColumnIndex(AISLEID_COLUMN));
-                logmsg = "Called from ProductID=" + Long.toString(currentproductid) +
-                        " ShopID set to=" + Long.toString(currentshopid) +
-                        " AisledID set to=" + Long.toString(currentaisleid) +
+                logmsg = "Called from ProductID=" + currentproductid +
+                        " ShopID set to=" + currentshopid +
+                        " AisledID set to=" + currentaisleid +
                         " Aisle Filter=" + aislefilter;
                 LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
                 actionbar.setTitle(actionbar.getTitle().toString() + " - (from Products)");
@@ -500,24 +500,20 @@ public class StockAddActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuitem) {
         int menuitemid = menuitem.getItemId();
-        switch (menuitemid) {
-            case R.id.actionhelp:
-                //new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
-                new DisplayHelp(this,
-                        getResources().getString(
-                                R.string.title_help_stockadd_activity),
-                        R.array.help_stockadd_activty,
-                        85,
-                        true,
-                        primary_color,
-                        0xbbffffff,
-                        22f,
-                        16f,
-                        12
-                );
-                return true;
-            default:
-                break;
+        if (menuitemid == R.id.actionhelp) {//new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
+            new DisplayHelp(this,
+                    getResources().getString(
+                            R.string.title_help_stockadd_activity),
+                    R.array.help_stockadd_activty,
+                    85,
+                    true,
+                    primary_color,
+                    0xbbffffff,
+                    22f,
+                    16f,
+                    12
+            );
+            return true;
         }
         return  onOptionsItemSelected(menuitem);
     }
@@ -578,9 +574,9 @@ public class StockAddActivity extends AppCompatActivity {
         intent.putExtra(StandardAppConstants.INTENTKEY_CALLINGACTIVITY,THIS_ACTIVITY);
         intent.putExtra(StandardAppConstants.INTENTKEY_CALLINGMODE,calledmode);
         logmsg = "Starting " + StockEditActivity.class.getSimpleName() +
-                " for ShopID=" + Long.toString(values.getLong3()) +
-                " AisleID=" + Long.toString(values.getLong1()) +
-                " ProductID=" + Long.toString(values.getLong2());
+                " for ShopID=" + values.getLong3() +
+                " AisleID=" + values.getLong1() +
+                " ProductID=" + values.getLong2();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
         startActivity(intent);
 
@@ -716,9 +712,9 @@ public class StockAddActivity extends AppCompatActivity {
                     productref,aisleref,
                     cost,order,
                     inputchecklistflag.isChecked(),chklstcnt);
-            logmsg = "AisleID=" + Long.toString(aisleref) +
-                    " ProductID=" + Long.toString(productref) +
-                    " ADD=" + Boolean.toString(dbpumethods.ifProductUsageAdded());
+            logmsg = "AisleID=" + aisleref +
+                    " ProductID=" + productref +
+                    " ADD=" + dbpumethods.ifProductUsageAdded();
             if (dbpumethods.ifProductUsageAdded()) {
                 setMessage(this,
                         "Product Added",
@@ -733,9 +729,9 @@ public class StockAddActivity extends AppCompatActivity {
                     order,
                     inputchecklistflag.isChecked(),
                     chklstcnt);
-            logmsg = "AisleID=" + Long.toString(aisleref) +
-                    " ProductID=" + Long.toString(productref) + "" +
-                    " EDIT=" + Boolean.toString(dbpumethods.ifProductUsageUpdated());
+            logmsg = "AisleID=" + aisleref +
+                    " ProductID=" + productref + "" +
+                    " EDIT=" + dbpumethods.ifProductUsageUpdated();
             if (dbpumethods.ifProductUsageUpdated()) {
                 setMessage(this,"Product Updated",false);
             }
@@ -976,7 +972,7 @@ public class StockAddActivity extends AppCompatActivity {
         SpinnerMove.moveToColumn(selectshop,id,slcsr,SHOPID_COLUMN,true);
         logmsg = "Shop Selection Spinner setup and positioned to Shop=" +
                 slcsr.getString(slcsr.getColumnIndex(SHOPNAME_COLUMN)) +
-                " ID=" + Long.toString(id) +
+                " ID=" + id +
                 " City=" + slcsr.getString(slcsr.getColumnIndex(SHOPCITY_COLUMN));
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
         selectshop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -1025,7 +1021,7 @@ public class StockAddActivity extends AppCompatActivity {
             currentshopid = parentshopid;
             logmsg = "Aisle Selection Spinner setup and positioned to Aisle=" +
                     alcsr.getString(alcsr.getColumnIndex(AISLENAME_COLUMN)) +
-                    " ID=" + Long.toString(id);
+                    " ID=" + id;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
         } else {
             logmsg = "No existing Aisle prodived for positioning (i.e. Aisle ID=0)" +
@@ -1040,7 +1036,7 @@ public class StockAddActivity extends AppCompatActivity {
                                        View view,
                                        int position, long rowid) {
                 currentaisleid = rowid;
-                stockfilter = AISLEREF_FULLCOLUMN + " = " + Long.toString(rowid);
+                stockfilter = AISLEREF_FULLCOLUMN + " = " + rowid;
                 stockedcursor = dbpumethods.getExpandedProductUsages(stockfilter,
                         stockorderby);
                 stocklistadapter.swapCursor(stockedcursor);
@@ -1083,7 +1079,7 @@ public class StockAddActivity extends AppCompatActivity {
         //        id,plcsr,DBProductsTableConstants.PRODUCTS_ID_COL);
         logmsg = "Product Selection Spinner setup and positioned to Product=" +
                 plcsr.getString(plcsr.getColumnIndex(PRODUCTNAME_COLUMN)) +
-                " ID=" + Long.toString(id);
+                " ID=" + id;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
 
         selectproduct.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

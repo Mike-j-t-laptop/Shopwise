@@ -93,7 +93,7 @@ class DBProductMethods {
             rv = true;
         }
         csr.close();
-        msg = "Returning " + Boolean.toString(rv);
+        msg = "Returning " + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -164,7 +164,7 @@ class DBProductMethods {
                 " = ?";
         String[] whereargs = new String[] { Long.toString(storageref)};
 
-        String columns[] = {
+        String[] columns = {
                 SQLMAX +
                         DBProductsTableConstants.PRODUCTS_STORAGEORDER_COL +
                         SQLMAXCLOSE +
@@ -187,7 +187,7 @@ class DBProductMethods {
             ));
         }
         csr.close();
-        logmsg = "Highest Product Storage Order=" + Integer.toString(rv);
+        logmsg = "Highest Product Storage Order=" + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,
                 logmsg,
@@ -241,7 +241,7 @@ class DBProductMethods {
                 SQLAND +
                 DBProductusageTableConstants.PRODUCTUSAGE_AISLEREF_COL_FULL +
                 " = " +
-                Long.toString(aisleid) +
+                aisleid +
                 ") ";
 
         if (filter.length() > 0 ) {
@@ -299,7 +299,7 @@ class DBProductMethods {
                 SQLAND +
                 DBProductusageTableConstants.PRODUCTUSAGE_AISLEREF_COL_FULL +
                 " = " +
-                Long.toString(aisleid) +
+                aisleid +
                 ") ";
 
         if (filter.length() > 0 ) {
@@ -327,7 +327,7 @@ class DBProductMethods {
         if(doesProductExist(productid)) {
             String filter = DBProductsTableConstants.PRODUCTS_ID_COL_FULL +
                     " = " +
-                    Long.toString(productid);
+                    productid;
             Cursor csr = DBCommonMethods.getTableRows(db,
                     DBProductsTableConstants.PRODUCTS_TABLE,
                     filter,
@@ -410,14 +410,14 @@ class DBProductMethods {
         if (storageorder > 0) {
             cv.put(DBProductsTableConstants.PRODUCTS_STORAGEORDER_COL, storageorder);
         }
-        String whereargs[] = { Long.toString(productid)};
+        String[] whereargs = {Long.toString(productid)};
         String whereclause = DBProductsTableConstants.PRODUCTS_ID_COL + " = ?";
         lastproductupdatedok = db.update(DBProductsTableConstants.PRODUCTS_TABLE,
                 cv,
                 whereclause,
                 whereargs)
                 > 0;
-        msg = "Product Modify=" + Boolean.toString(lastproductupdatedok) +
+        msg = "Product Modify=" + lastproductupdatedok +
                 " for Product=" + productname;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
     }
@@ -449,7 +449,7 @@ class DBProductMethods {
                 LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
             }
 
-            String whereargs[] = { Long.toString(productid)};
+            String[] whereargs = {Long.toString(productid)};
 
             // Delete ProductUsage rows that use this product
             pudeletes = db.delete(
@@ -458,7 +458,7 @@ class DBProductMethods {
                             " = ?",
                     whereargs
             );
-            msg = "Deleted " + Integer.toString(pudeletes) +
+            msg = "Deleted " + pudeletes +
                     " ProductUsage Rows that reference Product ID=" + productid;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
 
@@ -469,7 +469,7 @@ class DBProductMethods {
                             " = ?",
                     whereargs
             );
-            msg = "Deleted " + Integer.toString(sldeletes) +
+            msg = "Deleted " + sldeletes +
                     " ShoppingList Rows that reference Product ID=" + productid;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
 
@@ -480,7 +480,7 @@ class DBProductMethods {
                             " = ?",
                     whereargs
             );
-            msg = "Deleted " + Integer.toString(rdeletes) +
+            msg = "Deleted " + rdeletes +
                     " Rule Rows that reference Product ID=" + productid;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
 
@@ -491,7 +491,7 @@ class DBProductMethods {
                             " = ?",
                     whereargs
             );
-            msg = "Deleted " + Integer.toString(pdeletes) +
+            msg = "Deleted " + pdeletes +
                     " Products with Product ID=" + productid;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
 
@@ -523,7 +523,7 @@ class DBProductMethods {
         if (doesProductExist(productid)) {
             String filter = DBProductsTableConstants.PRODUCTS_ID_COL_FULL +
                     " = " +
-                    Long.toString(productid);
+                    productid;
             Cursor productcsr = DBCommonMethods.getTableRows(db,
                     DBProductsTableConstants.PRODUCTS_TABLE,
                     filter,

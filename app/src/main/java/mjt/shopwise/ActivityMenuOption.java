@@ -21,7 +21,7 @@ public class ActivityMenuOption {
         String methodname = "Construct";
         String msg = "Construction Name=" + menuoptionname +
                 " Info=" + menuoptioninfo +
-                " Order=" + Integer.toString(menuoptionorder);
+                " Order=" + menuoptionorder;
         mjt.shopwise.LogMsg.LogMsg(mjt.shopwise.LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,this.getClass().getSimpleName(),methodname);
         this.mMenuOptionName = menuoptionname;
         this.mMenuOptionInfo = menuoptioninfo;

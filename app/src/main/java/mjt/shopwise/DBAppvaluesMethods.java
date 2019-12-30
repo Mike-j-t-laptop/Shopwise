@@ -90,7 +90,7 @@ public class DBAppvaluesMethods {
         csr = db.query(DBAppvaluesTableConstants.APPVALUES_TABLE,null,null,null,null,null,null);
         int rv = csr.getCount();
         csr.close();
-        msg = "Returning Count of "+ Integer.toString(rv);
+        msg = "Returning Count of "+ rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -112,9 +112,7 @@ public class DBAppvaluesMethods {
                 filter,
                 order
         );
-        msg = "Returning Cursor with " + Integer.toString(
-                rv.getCount()
-        ) + " rows.";
+        msg = "Returning Cursor with " + rv.getCount() + " rows.";
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -127,7 +125,7 @@ public class DBAppvaluesMethods {
     @SuppressWarnings("unused")
     long getLastAppvalueAdded() {
         String msg = "Invoked and returning id=" +
-                Long.toString(lastappvalueadded) +
+                lastappvalueadded +
                 " as last added.";
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
@@ -143,7 +141,7 @@ public class DBAppvaluesMethods {
     @SuppressWarnings("unused")
     boolean ifAppvalueAddedOK() {
         String msg = "Invoked and returning AddedOK=" +
-                Boolean.toString(lastappvalueaddok);
+                lastappvalueaddok;
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return lastappvalueaddok;
@@ -157,7 +155,7 @@ public class DBAppvaluesMethods {
      */
     @SuppressWarnings("unused")
     boolean doesAppValueExist(long appvalueid) {
-        String msg = "Invoked for APPVALUEID=" + Long.toString(appvalueid);
+        String msg = "Invoked for APPVALUEID=" + appvalueid;
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         Cursor csr;
@@ -173,8 +171,8 @@ public class DBAppvaluesMethods {
         }
         csr.close();
         msg = "Returning Appvalue with id="
-                + Long.toString(appvalueid) +
-                " Exists=" + Boolean.toString(rv);
+                + appvalueid +
+                " Exists=" + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -387,7 +385,7 @@ public class DBAppvaluesMethods {
                         String settingsinfo) {
 
         String msg = "Invoked (INTEGER) for APPVALUENAME=" + appvaluename +
-                " APPVALUE=" + Long.toString(appvalue);
+                " APPVALUE=" + appvalue;
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
 
@@ -436,7 +434,7 @@ public class DBAppvaluesMethods {
                         String settingsinfo) {
         String msg = "Invoked (LONG (Note! stored as INTEGER in DB)) for APPVALUENAME=" +
                 appvaluename +
-                " APPVALUE=" + Integer.toString(appvalue);
+                " APPVALUE=" + appvalue;
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         insertAppvalue(appvaluename,
@@ -462,7 +460,7 @@ public class DBAppvaluesMethods {
                         String settingsinfo) {
         String msg = "Invoked (REAL (from DOUBLE)) for APPVALUENAME=" +
                 appvaluename +
-                " APPVALUE=" + Double.toString(appvalue);
+                " APPVALUE=" + appvalue;
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
 
@@ -542,7 +540,7 @@ public class DBAppvaluesMethods {
         String msg = "Invoked (TEXT and INTEGER specal case) for APPVALUENAME=" +
                 appvaluename +
                 " APPVALUE(TEXT)=" + appvalue +
-                " APPVALUE(INTEGER)=" + Integer.toString(extraintvalue);
+                " APPVALUE(INTEGER)=" + extraintvalue;
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
 
@@ -613,7 +611,7 @@ public class DBAppvaluesMethods {
                                          long appvalue,
                                          boolean multipleallowed) {
         String msg = "Invoked (INTEGER) for APPVALUENAME=" + appvaluename +
-                " APPVALUE=" + Long.toString(appvalue);
+                " APPVALUE=" + appvalue;
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return !multipleallowed && checkDuplicateName(appvaluename) || checkDuplicated(appvaluename,
@@ -632,7 +630,7 @@ public class DBAppvaluesMethods {
                                          double appvalue,
                                          boolean multipleallowed) {
         String msg = "Invoked (REAL) for APPVALUENAME=" + appvaluename +
-                " APPVALUE=" + Double.toString(appvalue);
+                " APPVALUE=" + appvalue;
         String methodname = new Object() {
         }.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
@@ -681,12 +679,12 @@ public class DBAppvaluesMethods {
             csr.close();
             lastappvalueaddok = false;
             lastappvaleaddrc = APPVALUE_RC_DUPLICATEDNAMEANDVAL;
-            msg = "Full Duplicate=" + Boolean.toString(true);
+            msg = "Full Duplicate=" + true;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
             return true;
         }
         csr.close();
-        msg = "Full Duplicate=" + Boolean.toString(false);
+        msg = "Full Duplicate=" + false;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return false;
     }
@@ -713,12 +711,12 @@ public class DBAppvaluesMethods {
             csr.close();
             lastappvalueaddok = false;
             lastappvaleaddrc = APPVALUE_RC_DUPLICATEDNAME;
-            msg = "Returning " + Boolean.toString(true);
+            msg = "Returning " + true;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
             return true;
         }
         csr.close();
-        msg = "Returning " + Boolean.toString(false);
+        msg = "Returning " + false;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return false;
     }
@@ -755,7 +753,7 @@ public class DBAppvaluesMethods {
             ));
         }
         csr.close();
-        msg = "Returning " + Long.toString(rv);
+        msg = "Returning " + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -792,7 +790,7 @@ public class DBAppvaluesMethods {
             ));
         }
         csr.close();
-        msg = "Returning " + Double.toString(rv);
+        msg = "Returning " + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -869,7 +867,7 @@ public class DBAppvaluesMethods {
             );
         }
         msg = "Returning LONG ArrayList with " +
-                Integer.toString(rv.size()) +
+                rv.size() +
                 " Elements for APPVALUENAME=" + appvaluename;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
@@ -912,7 +910,7 @@ public class DBAppvaluesMethods {
             );
         }
         msg = "Returning DOUBLE ArrayList with " +
-                Integer.toString(rv.size()) +
+                rv.size() +
                 " Elements for APPVALUENAME=" + appvaluename;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
@@ -955,7 +953,7 @@ public class DBAppvaluesMethods {
             );
         }
         msg = "Returning STRING ArrayList with " +
-                Integer.toString(rv.size()) +
+                rv.size() +
                 " Elements for APPVALUENAME=" + appvaluename;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;

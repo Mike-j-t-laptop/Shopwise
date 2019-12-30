@@ -86,7 +86,7 @@ class DBAisleMethods {
             mergecursors[1] = dummyrow;
             rv = new MergeCursor(mergecursors);
         }
-        msg = "Returned " + Integer.toString(rv.getCount()) + " Aisle rows." ;
+        msg = "Returned " + rv.getCount() + " Aisle rows." ;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -97,7 +97,7 @@ class DBAisleMethods {
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         long rv = 0;
         String filter = DBAislesTableConstants.AISLES_ID_COL_FULL +
-                " = " + Long.toString(aisleid);
+                " = " + aisleid;
         String order = "";
         Cursor csr = DBCommonMethods.getTableRows(db,
                 DBAislesTableConstants.AISLES_TABLE,
@@ -110,7 +110,7 @@ class DBAisleMethods {
             ));
         }
         msg = "Found OwningShop=" +
-                Boolean.toString(csr.getCount() > 0);
+                (csr.getCount() > 0);
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -126,11 +126,11 @@ class DBAisleMethods {
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         String filter = DBAislesTableConstants.AISLES_SHOPREF_COL_FULL +
-                " = " + Long.toString(shopid);
+                " = " + shopid;
         int rv = DBCommonMethods.getTableRowCount(db,
                 DBAislesTableConstants.AISLES_TABLE,
                 filter, "");
-        msg = "Found " + Integer.toString(rv) + " Aisles";
+        msg = "Found " + rv + " Aisles";
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -170,7 +170,7 @@ class DBAisleMethods {
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         int rv = 0;
-        String columns[] = {
+        String[] columns = {
                 SQLMAX +
                         DBAislesTableConstants.AISLES_ORDER_COL +
                         SQLMAXCLOSE +
@@ -179,7 +179,7 @@ class DBAisleMethods {
         };
         String whereclause = DBAislesTableConstants.AISLES_SHOPREF_COL +
                 " = ? ";
-        String whereargs[] = new String[] {
+        String[] whereargs = new String[]{
                 Long.toString(shopid)
         };
         Cursor csr = db.query(
@@ -196,7 +196,7 @@ class DBAisleMethods {
             ));
         }
         csr.close();
-        msg = "Highest Aisle Order=" + Integer.toString(rv);
+        msg = "Highest Aisle Order=" + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -213,7 +213,7 @@ class DBAisleMethods {
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         boolean rv = false;
         String filter = DBAislesTableConstants.AISLES_ID_COL_FULL +
-                " = " + Long.toString(aisleid);
+                " = " + aisleid;
         Cursor csr = DBCommonMethods.getTableRows(db,
                 DBAislesTableConstants.AISLES_TABLE,
                 filter,
@@ -222,7 +222,7 @@ class DBAisleMethods {
             rv = true;
         }
         csr.close();
-        msg = "Aisle found=" + Boolean.toString(rv);
+        msg = "Aisle found=" + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -242,10 +242,10 @@ class DBAisleMethods {
         boolean rv = false;
         if (dbshopmethods.doesShopExist(shopid)) {
             String filter = DBAislesTableConstants.AISLES_ID_COL_FULL +
-                    " = " + Long.toString(aisleid) +
+                    " = " + aisleid +
                     SQLAND +
                     DBAislesTableConstants.AISLES_SHOPREF_COL_FULL +
-                    " = " + Long.toString(shopid);
+                    " = " + shopid;
             Cursor csr = DBCommonMethods.getTableRows(db,
                     DBAislesTableConstants.AISLES_TABLE,
                     filter,
@@ -255,7 +255,7 @@ class DBAisleMethods {
             }
             csr.close();
         }
-        msg = "Aisle in Shop=" + Boolean.toString(rv);
+        msg = "Aisle in Shop=" + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -275,7 +275,7 @@ class DBAisleMethods {
         if (doesAisleExist(aisleid)) {
             String filter = DBAislesTableConstants.AISLES_ID_COL_FULL +
                     " = " +
-                    Long.toString(aisleid);
+                    aisleid;
             Cursor csr = DBCommonMethods.getTableRows(db,
                     DBAislesTableConstants.AISLES_TABLE,
                     filter,
@@ -323,7 +323,7 @@ class DBAisleMethods {
         } else {
             lastaisleaddok = false;
         }
-        msg = "Aisle=" + aislename + " Inserted=" + Boolean.toString(lastaisleaddok);
+        msg = "Aisle=" + aislename + " Inserted=" + lastaisleaddok;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
     }
 
@@ -338,7 +338,7 @@ class DBAisleMethods {
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         if (!doesAisleExist(aisleid)) {
-            msg = "Aisle=" + aislename + " ID=" + Long.toString(aisleid) +
+            msg = "Aisle=" + aislename + " ID=" + aisleid +
                     " does not exist. Not Updated.";
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
             return;
@@ -354,16 +354,16 @@ class DBAisleMethods {
             updatecount++;
         }
         if (updatecount < 1) {
-            msg = "Aisle=" + aislename + " ID=" + Long.toString(aisleid) +
+            msg = "Aisle=" + aislename + " ID=" + aisleid +
                     " Nothing to update. Not Updated.";
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
             return;
         }
-        String whereargs[] = {Long.toString(aisleid)};
+        String[] whereargs = {Long.toString(aisleid)};
         String whereclause = DBAislesTableConstants.AISLES_ID_COL + " = ?";
         lastaisleupdateok = db.update(DBAislesTableConstants.AISLES_TABLE, cv, whereclause, whereargs) > 0;
-        msg = "Aisle=" + aislename + " ID=" + Long.toString(aisleid) +
-                " Updated=" + Boolean.toString(lastaisleupdateok);
+        msg = "Aisle=" + aislename + " ID=" + aisleid +
+                " Updated=" + lastaisleupdateok;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
     }
 
@@ -395,7 +395,7 @@ class DBAisleMethods {
             }
 
             //  Set whereargs string array to the aisleid as a string
-            String whereargs[] = {Long.toString(aisleid)};
+            String[] whereargs = {Long.toString(aisleid)};
             // Delete ProductUsage rows that have Aisle as a parent
             pudeletes = db.delete(
                     DBProductusageTableConstants.PRODUCTUSAGE_TABLE,
@@ -403,7 +403,7 @@ class DBAisleMethods {
                             " = ?",
                     whereargs
             );
-            msg = "Deleted " + Integer.toString(pudeletes) +
+            msg = "Deleted " + pudeletes +
                     " ProductUsage Rows that reference Aisle ID=" + aisleid;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
             // Delete Shopping List rows with Aisle as a parent
@@ -414,7 +414,7 @@ class DBAisleMethods {
                             " = ?",
                     whereargs
             );
-            msg = "Deleted " + Integer.toString(pudeletes) +
+            msg = "Deleted " + pudeletes +
                     " ShoppingList Rows that reference Aisle ID=" + aisleid;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
             // Delete Rule rows with Aisle as a parent
@@ -425,7 +425,7 @@ class DBAisleMethods {
                             " = ?"
                     ,
                     whereargs);
-            msg = "Deleted " + Integer.toString(pudeletes) +
+            msg = "Deleted " + pudeletes +
                     " Rule Rows that reference Aisle ID=" + aisleid;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
             // Finally Delete the Aisle itself
@@ -434,13 +434,13 @@ class DBAisleMethods {
                     DBAislesTableConstants.AISLES_TABLE,
                     DBAislesTableConstants.AISLES_ID_COL + " = ?",
                     whereargs);
-            msg = "Deleted " + Integer.toString(pudeletes) +
+            msg = "Deleted " + pudeletes +
                     " Aisle Rows with Aisle ID=" + aisleid;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
             if (!intransaction) {
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                msg = "DB Transacion SET and ENDED for Aisle ID=" + Long.toString(aisleid);
+                msg = "DB Transacion SET and ENDED for Aisle ID=" + aisleid;
                 LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
             }
         }

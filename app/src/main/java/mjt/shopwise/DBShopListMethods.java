@@ -75,7 +75,7 @@ public class DBShopListMethods {
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         Cursor rv;
         String filter = DBShopListTableConstants.SHOPLIST_ID_COL_FULL +
-                " = " + Long.toString(shoplistid) +
+                " = " + shoplistid +
                 SQLENDSTATEMENT;
         rv =  DBCommonMethods.getTableRows(db,
                 DBShopListTableConstants.SHOPLIST_TABLE,
@@ -83,8 +83,8 @@ public class DBShopListMethods {
                 ""
         );
         msg = "Returning Cursor for ShoplistID=" +
-                Long.toString(shoplistid) +
-                " rows=" + Integer.toString(rv.getCount());
+                shoplistid +
+                " rows=" + rv.getCount();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -104,8 +104,8 @@ public class DBShopListMethods {
             rv = true;
         }
         csr.close();
-        msg = "ShoplistID=" + Long.toString(shoplistid) +
-                "Exists=" + Boolean.toString(rv);
+        msg = "ShoplistID=" + shoplistid +
+                "Exists=" + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -134,7 +134,7 @@ public class DBShopListMethods {
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         boolean rv = false;
-        String whereargs[] = new String[] {Long.toString(aisleid),
+        String[] whereargs = new String[]{Long.toString(aisleid),
                 Long.toString(productid)};
         String whereclause = DBShopListTableConstants.SHOPLIST_AISLEREF_COL +
                 " = ? AND " +
@@ -147,9 +147,9 @@ public class DBShopListMethods {
             rv = true;
         }
         csr.close();
-        msg = "ShoppingList Entry for AisleID=" + Long.toString(aisleid) +
-                " ProductID=" + Long.toString(productid) +
-                " Exists=" + Boolean.toString(rv);
+        msg = "ShoppingList Entry for AisleID=" + aisleid +
+                " ProductID=" + productid +
+                " Exists=" + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -190,7 +190,7 @@ public class DBShopListMethods {
 
         }
         csr.close();
-        msg = "Tidied " + Integer.toString(cleancount) +
+        msg = "Tidied " + cleancount +
                 " ShoppingList Entries.";
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
     }
@@ -310,7 +310,7 @@ public class DBShopListMethods {
         Cursor rv =  dbdao.getTableRows(
                 DBShopListTableConstants.SHOPLIST_TABLE,
                 "", filter, orderby);
-        msg = "Returning Cursor with " + Integer.toString(rv.getCount()) +
+        msg = "Returning Cursor with " + rv.getCount() +
                 " ShoppingList Entries";
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
@@ -401,7 +401,7 @@ public class DBShopListMethods {
                 + SQLENDSTATEMENT;
 
         rv = db.rawQuery(sql,null);
-        msg = "returning Cursor with " + Integer.toString(rv.getCount()) +
+        msg = "returning Cursor with " + rv.getCount() +
                 " ShoppingList Entries.";
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
@@ -447,7 +447,7 @@ public class DBShopListMethods {
         //  if the number to get passed is negative then increment the
         // shoplistdone (number purchased)
         if (exists && incrementifexists) {
-            String whereargs[] = new String[] {
+            String[] whereargs = new String[]{
                     Long.toString(aisleid),
                     Long.toString(productid)
             };
@@ -500,9 +500,9 @@ public class DBShopListMethods {
                 lastshoplistupdatedok = db.update(
                         DBShopListTableConstants.SHOPLIST_TABLE,
                         cv, whereclause, whereargs) > 0;
-                msg = "ShoppingList Entry AisleID=" + Long.toString(aisleid) +
-                        " ProductID=" + Long.toString(productid) +
-                        " Updated=" + Boolean.toString(lastshoplistupdatedok);
+                msg = "ShoppingList Entry AisleID=" + aisleid +
+                        " ProductID=" + productid +
+                        " Updated=" + lastshoplistupdatedok;
                 LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL, LOGTAG, msg, THISCLASS, methodname);
             }
         }
@@ -524,9 +524,9 @@ public class DBShopListMethods {
             if (lastshoplistadded.getLong1() > 0) {
                 lastshoplistaddedok = true;
             }
-            msg = "ShoppingList Entry AisleID=" + Long.toString(aisleid) +
-                    " ProductID=" + Long.toString(productid) +
-                    "Added=" + Boolean.toString(lastshoplistaddedok);
+            msg = "ShoppingList Entry AisleID=" + aisleid +
+                    " ProductID=" + productid +
+                    "Added=" + lastshoplistaddedok;
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         }
     }
@@ -567,15 +567,15 @@ public class DBShopListMethods {
         String logmsg = "Update of shoplistdone (number purchased) for Shop" +
                 shopname +
                 " (ID=" +
-                Long.toString(shopref) +
+                shopref +
                 ") Aisle " +
                 aislename +
                 " (ID=" +
-                Long.toString(aisleid) +
+                aisleid +
                 ") Product " +
                 productname +
-                " (ID=" + Long.toString(productid) +
-                ") was " + Boolean.toString(lastshoplistupdatedok);
+                " (ID=" + productid +
+                ") was " + lastshoplistupdatedok;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,
                 logmsg,
@@ -605,10 +605,10 @@ public class DBShopListMethods {
 
         ArrayList<String> rv = new ArrayList<>();
         String sllfilter = DBShopListTableConstants.SHOPLIST_AISLEREF_COL_FULL +
-                " = " + Long.toString(aisleid) +
+                " = " + aisleid +
                 " AND " +
                 DBProductsTableConstants.PRODUCTS_ID_COL_FULL +
-                " = " + Long.toString(productid);
+                " = " + productid;
         Cursor sllcsr = getExpandedShopListEntries(sllfilter);
         if (sllcsr.getCount() > 0 ) {
             while (sllcsr.moveToNext()) {
@@ -641,15 +641,15 @@ public class DBShopListMethods {
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         int deletedcount = 0;
         if (doesShopListEntryExist(shoplistid)) {
-            String whereargs[] = {Long.toString(shoplistid)};
+            String[] whereargs = {Long.toString(shoplistid)};
             deletedcount = db.delete(
                     DBShopListTableConstants.SHOPLIST_TABLE,
                     DBShopListTableConstants.SHOPLIST_ID_COL + " = ?",
                     whereargs
             );
         }
-        msg = "ShopList Entry for ShopID=" + Long.toString(shoplistid) +
-                " Deleted=" + Boolean.toString(deletedcount > 0);
+        msg = "ShopList Entry for ShopID=" + shoplistid +
+                " Deleted=" + (deletedcount > 0);
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
     }
 
@@ -665,7 +665,7 @@ public class DBShopListMethods {
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         int deletedcount = 0;
         if (doesShopListEntryExist(aisleid, productid)) {
-            String whereargs[] = new String[] {
+            String[] whereargs = new String[]{
                     Long.toString(aisleid),
                     Long.toString(productid)
             };
@@ -678,9 +678,9 @@ public class DBShopListMethods {
                     whereclause,whereargs
             );
         }
-        msg = "ShopList Entry for AisleID=" + Long.toString(aisleid) +
-                " ProductID=" + Long.toString(productid) +
-                " Deleted=" + Boolean.toString(deletedcount > 0);
+        msg = "ShopList Entry for AisleID=" + aisleid +
+                " ProductID=" + productid +
+                " Deleted=" + (deletedcount > 0);
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
     }
 }

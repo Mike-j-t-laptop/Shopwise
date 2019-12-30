@@ -51,7 +51,7 @@ public class DBDAO {
         Cursor csr = db.query(tablename,null,null,null,null,null,null);
         int rv = csr.getCount();
         csr.close();
-        msg = "Returned " + Integer.toString(rv) +
+        msg = "Returned " + rv +
                 " rows from Table=" +tablename;
         methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);

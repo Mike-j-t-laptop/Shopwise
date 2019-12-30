@@ -142,6 +142,7 @@
     <string name="proceedbutton">PROCEED</string>
     <string name="backupbutton">BACKUP</string>
     <string name="restorebutton">RESTORE</string>
+    <string name="reorgbutton">REORG</string>
     <string name="rulesbutton">RULES</string>
     <string name="suggestbutton">SUGGEST</string>
     <string name="checkbutton">CHECK</string>

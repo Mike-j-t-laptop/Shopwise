@@ -390,11 +390,11 @@ class StoreData {
         rv = "Directory path=" + directory + "\n" +
                 "SubDirectory=" + subdirectory + "\n" +
                 "Filename=" + filename + "\n" +
-                "Mounted =" + Boolean.toString(mounted) + "\n" +
-                "Directory Exists=" + Boolean.toString(this.direxists) + "\n" +
-                "File Exists=" + Boolean.toString(this.fileexists) + "\n" +
-                "In Error=" + Boolean.toString(inerror) + "\n" +
-                "Last Error Code=" + Long.toString(errorcode);
+                "Mounted =" + mounted + "\n" +
+                "Directory Exists=" + this.direxists + "\n" +
+                "File Exists=" + this.fileexists + "\n" +
+                "In Error=" + inerror + "\n" +
+                "Last Error Code=" + errorcode;
         return rv;
     }
 

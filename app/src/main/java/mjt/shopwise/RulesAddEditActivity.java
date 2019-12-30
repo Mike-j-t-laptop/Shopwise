@@ -576,7 +576,7 @@ public class RulesAddEditActivity extends AppCompatActivity {
         }
 
         rulefilter = DBRulesTableConstants.RULES_AISLEREF_COL_FULL + " = " +
-                Long.toString(currentaisleid);
+                currentaisleid;
         rlcsr = dbrulemethods.getExpandedRuleList(rulefilter,orderby);
         rulelistadapter = new AdapterRuleList(this,
                 rlcsr,
@@ -642,24 +642,20 @@ public class RulesAddEditActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuitem) {
         int menuitemid = menuitem.getItemId();
-        switch (menuitemid) {
-            case R.id.actionhelp:
-                //new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
-                new DisplayHelp(this,
-                        getResources().getString(
-                                R.string.title_help_rulesaddedit_activity),
-                        R.array.help_rulesaddedit_activty,
-                        85,
-                        true,
-                        primary_color,
-                        0xbbffffff,
-                        22f,
-                        16f,
-                        12
-                );
-                return true;
-            default:
-                break;
+        if (menuitemid == R.id.actionhelp) {//new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
+            new DisplayHelp(this,
+                    getResources().getString(
+                            R.string.title_help_rulesaddedit_activity),
+                    R.array.help_rulesaddedit_activty,
+                    85,
+                    true,
+                    primary_color,
+                    0xbbffffff,
+                    22f,
+                    16f,
+                    12
+            );
+            return true;
         }
         return  onOptionsItemSelected(menuitem);
     }
@@ -771,8 +767,8 @@ public class RulesAddEditActivity extends AppCompatActivity {
         if (!dbpumethods.doesProductUsageExist(currentaisleid,currentproductid)) {
             setMessage(this,"Cannot add Rule. Stock not found", true);
             logmsg = "Cannot Add Rule due to Stock (product/aisle) not found. " +
-                    " for AisleID=" + Long.toString(currentaisleid) +
-                    " ProductID=" + Long.toString(currentproductid) +
+                    " for AisleID=" + currentaisleid +
+                    " ProductID=" + currentproductid +
                     "\n\tIssue=" + emsg.getErrorMessage();
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
             return;
@@ -839,7 +835,7 @@ public class RulesAddEditActivity extends AppCompatActivity {
                 break;
         }
         rulefilter = DBRulesTableConstants.RULES_AISLEREF_COL_FULL + " = " +
-                Long.toString(currentaisleid);
+                currentaisleid;
         rlcsr = dbrulemethods.getExpandedRuleList(rulefilter,orderby);
         rulelistadapter.swapCursor(rlcsr);
     }
@@ -864,7 +860,7 @@ public class RulesAddEditActivity extends AppCompatActivity {
                                                int position, long rowid) {
                         currentshopid = rowid;
                         aislefilter = AISLESHOPREF_COLUMN + " = " +
-                                Long.toString(currentshopid);
+                                currentshopid;
                         alcsr = dbaislemethods.getAisles(aislefilter, aisleorderby, false);
                         aislelistadapter.swapCursor(alcsr);
                     }
@@ -917,7 +913,7 @@ public class RulesAddEditActivity extends AppCompatActivity {
                         }
                         productlistadapter.swapCursor(plcsr);
                         rulefilter = DBRulesTableConstants.RULES_AISLEREF_COL_FULL + " = " +
-                                Long.toString(currentaisleid);
+                                currentaisleid;
                         rlcsr = dbrulemethods.getExpandedRuleList(rulefilter,orderby);
                         rulelistadapter.swapCursor(rlcsr);
                     }
@@ -1127,7 +1123,7 @@ public class RulesAddEditActivity extends AppCompatActivity {
         currentproductcount = plcsr.getCount();
         productlistadapter.swapCursor(plcsr);
         rulefilter = DBRulesTableConstants.RULES_AISLEREF_COL_FULL + " = " +
-                Long.toString(currentaisleid);
+                currentaisleid;
         rlcsr = dbrulemethods.getExpandedRuleList(rulefilter,orderby);
         rulelistadapter.swapCursor(rlcsr);
     }

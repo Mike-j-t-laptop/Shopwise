@@ -18,8 +18,6 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import static mjt.shopwise.StandardAppConstants.*;
 import static mjt.shopwise.SQLKWORD.*;
 
@@ -114,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("REFITEGRITYCHECK",s);
         }
 
-        // Expand the database
+        // Expand (alter the schema) the database
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,
                 "Expanding Database (if required)", this, methodname);
         db.expand(null, true);
@@ -131,13 +129,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        /**
+        /*
          * !!!! IMPORTANT  !!!!
          * DataBinding is only available if turned on the in build.gradle (Module: app) using :-
          *
          *     dataBinding {
          *         enabled = true
          *     }
+         *
          */
         DataBindingUtil.setContentView(this,R.layout.activity_main);
 
@@ -191,24 +190,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuitem) {
         int menuitemid = menuitem.getItemId();
-        switch (menuitemid) {
-            case R.id.actionhelp:
-                //new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
-                new DisplayHelp(this,
-                        getResources().getString(
-                                R.string.title_help_main_activity),
-                        R.array.help_main_activity,
-                        85,
-                        true,
-                        0xff0000ff,
-                        0xbbffffff,
-                        22f,
-                        16f,
-                        12
-                );
-                return true;
-            default:
-                break;
+        if (menuitemid == R.id.actionhelp) {//new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
+            new DisplayHelp(this,
+                    getResources().getString(
+                            R.string.title_help_main_activity),
+                    R.array.help_main_activity,
+                    85,
+                    true,
+                    0xff0000ff,
+                    0xbbffffff,
+                    22f,
+                    16f,
+                    12
+            );
+            return true;
         }
         return  onOptionsItemSelected(menuitem);
     }
@@ -432,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
                     ordermatch = true;
                 }
             }
-            // comparisons done so act accordingly
+            // comparisons done to act accordingly
             // skip to next if both match or only the option mismatches
             // (latter cases means the notes are for another option))
             if ((optionmatch && notesmatch && ordermatch) || (!optionmatch && notesmatch &&ordermatch)) {
@@ -464,7 +459,7 @@ public class MainActivity extends AppCompatActivity {
                         MAINACTIVITYOPTIONLIST[i].getmMenuOptionInfo());
                 cv.put(DBAppvaluesTableConstants.APPVALUES_INT_COL,
                         MAINACTIVITYOPTIONLIST[i].getmMenuOptionOrder());
-                String whereargs[] = { MENUOPTIONS,
+                String[] whereargs = {MENUOPTIONS,
                         MAINACTIVITYOPTIONLIST[i].getMenuOptionName()
                 };
                 String whereclause = DBAppvaluesTableConstants.APPVALUES_NAME_COL +
@@ -565,7 +560,7 @@ public class MainActivity extends AppCompatActivity {
     /**************************************************************************
      * actionButtonClick - Take the appropriate action when an action button is
      * touched/clicked
-     * Curenttly the same activity is invoked however the position is passed
+     * Currently the same activity is invoked however the position is passed
      *
      * @param view the view (TextView acting as Button)that was clicked
      */

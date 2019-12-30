@@ -302,24 +302,20 @@ public class AislesActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem menuitem) {
         int menuitemid = menuitem.getItemId();
-        switch (menuitemid) {
-            case R.id.actionhelp:
-                //new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
-                new DisplayHelp(this,
-                        getResources().getString(
-                                R.string.title_help_aisles_activity),
-                        R.array.help_aisles_activity,
-                        85,
-                        true,
-                        primary_color,
-                        0xbbffffff,
-                        22f,
-                        16f,
-                        12
-                );
-                return true;
-            default:
-                break;
+        if (menuitemid == R.id.actionhelp) {//new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
+            new DisplayHelp(this,
+                    getResources().getString(
+                            R.string.title_help_aisles_activity),
+                    R.array.help_aisles_activity,
+                    85,
+                    true,
+                    primary_color,
+                    0xbbffffff,
+                    22f,
+                    16f,
+                    12
+            );
+            return true;
         }
         return  onOptionsItemSelected(menuitem);
     }
@@ -643,7 +639,7 @@ public class AislesActivity extends AppCompatActivity{
         orderfld = neworderfld;
         sortchanged = true;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,
-                "Orderby field to be changed=" +  Boolean.toString(sortchanged) +
+                "Orderby field to be changed=" + sortchanged +
                 " will be " + orderby,
                 this,methodname);
     }
@@ -710,13 +706,13 @@ public class AislesActivity extends AppCompatActivity{
                 ));
                 shopfilter = DBAislesTableConstants.AISLES_SHOPREF_COL_FULL +
                         " = " +
-                        Long.toString(currentshopid);
+                        currentshopid;
                 alcsr = dbaislemethods.getAisles(shopfilter,orderby, false);
                 if (aislesadapterset) {
                     aislelistadapter.swapCursor(alcsr);
                 }
                 String msg = "Selected Shop=" + currentshopname +
-                        " id=" + Long.toString(currentshopid);
+                        " id=" + currentshopid;
                 LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                         AislesActivity.LOGTAG,
                         msg,
