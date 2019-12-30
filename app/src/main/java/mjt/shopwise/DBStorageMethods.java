@@ -90,7 +90,7 @@ public class DBStorageMethods {
                 methodname
         );
         int rv = 0;
-        String columns[] = {
+        String[] columns = {
                 SQLMAX +
                         DBStorageTableConstants.STORAGE_ORDER_COL +
                         SQLMAXCLOSE +
@@ -110,7 +110,7 @@ public class DBStorageMethods {
         }
         csr.close();
         logmsg = "Highest Storage Order=" +
-                Integer.toString(rv);
+                rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,
                 logmsg,
@@ -140,7 +140,7 @@ public class DBStorageMethods {
                 DBStorageTableConstants.STORAGE_TABLE,
                 filter,order);
         logmsg = "Returning Storage Cursor with " +
-                Integer.toString(rv.getCount()) + " rows.";
+                rv.getCount() + " rows.";
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,
                 logmsg,
@@ -180,8 +180,8 @@ public class DBStorageMethods {
             laststorageaddedok = true;
         }
         logmsg = "Storage=" + storagename +
-                " Order=" + Integer.toString(storageorder) +
-                "Added=" + Boolean.toString(laststorageaddedok);
+                " Order=" + storageorder +
+                "Added=" + laststorageaddedok;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,
                 logmsg,
@@ -207,7 +207,7 @@ public class DBStorageMethods {
         );
         boolean rv = false;
         String filter = DBStorageTableConstants.STORAGE_ID_COL_FULL +
-                " = " + Long.toString(storageid) +
+                " = " + storageid +
                 SQLENDSTATEMENT;
         Cursor csr = DBCommonMethods.getTableRows(db,
                 DBStorageTableConstants.STORAGE_TABLE,
@@ -218,8 +218,8 @@ public class DBStorageMethods {
             rv = true;
         }
         csr.close();
-        logmsg = "StorageID=" + Long.toString(storageid) +
-                "Exists=" + Boolean.toString(rv);
+        logmsg = "StorageID=" + storageid +
+                "Exists=" + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,
                 logmsg,
@@ -247,7 +247,7 @@ public class DBStorageMethods {
         );
         laststorageupdatedok = false;
         if (!doesStorageExist(storageid)) {
-            logmsg = "StorageID=" + Long.toString(storageid) +
+            logmsg = "StorageID=" + storageid +
                     " does not exist. Not Updated.";
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                     LOGTAG,
@@ -283,8 +283,8 @@ public class DBStorageMethods {
                 cv,
                 whereclause,
                 whereargs) > 0;
-        logmsg = "StorageID=" + Long.toString(storageid) +
-                " Updated=" + Boolean.toString(laststorageupdatedok);
+        logmsg = "StorageID=" + storageid +
+                " Updated=" + laststorageupdatedok;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,
                 logmsg,
@@ -362,7 +362,7 @@ public class DBStorageMethods {
             }
             csr.close();
         } else {
-            logmsg = "Storage (ID=" + Long.toString(storageid) + ") does not exist.";
+            logmsg = "Storage (ID=" + storageid + ") does not exist.";
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                     LOGTAG,
                     logmsg,

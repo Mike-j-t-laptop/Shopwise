@@ -362,24 +362,20 @@ public class ProductsAddEditActivity  extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuitem) {
         int menuitemid = menuitem.getItemId();
-        switch (menuitemid) {
-            case R.id.actionhelp:
-                //new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
-                new DisplayHelp(this,
-                        getResources().getString(
-                                R.string.title_help_productsaddedit_activity),
-                        R.array.help_productsaddedit_activty,
-                        85,
-                        true,
-                        primary_color,
-                        0xbbffffff,
-                        22f,
-                        16f,
-                        12
-                );
-                return true;
-            default:
-                break;
+        if (menuitemid == R.id.actionhelp) {//new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
+            new DisplayHelp(this,
+                    getResources().getString(
+                            R.string.title_help_productsaddedit_activity),
+                    R.array.help_productsaddedit_activty,
+                    85,
+                    true,
+                    primary_color,
+                    0xbbffffff,
+                    22f,
+                    16f,
+                    12
+            );
+            return true;
         }
         return  onOptionsItemSelected(menuitem);
     }
@@ -484,7 +480,7 @@ public class ProductsAddEditActivity  extends AppCompatActivity {
                     msg = msg + notsaved;
                 }
                 logmsg = "Product=" + productname +
-                        " Added=" + Boolean.toString(!notdoneok);
+                        " Added=" + !notdoneok;
                 LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
                 break;
             case StandardAppConstants.CM_EDIT:
@@ -503,7 +499,7 @@ public class ProductsAddEditActivity  extends AppCompatActivity {
                     msg = msg + notsaved;
                 }
                 logmsg = "Product=" + productname +
-                        " Updated=" + Boolean.toString(!notdoneok);
+                        " Updated=" + !notdoneok;
                 LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
                 break;
         }

@@ -210,11 +210,11 @@ public class DBTable {
                             "\nEDBT0015 - Duplicated Column - " +
                             "Column=" + needlecolumn.getDBColumnName() +
                             " col(" +
-                            Integer.toString(i) +
+                            i +
                             ") is the same as " +
                             "Column=" + haystackcolumn.getDBColumnName() +
                             " col(" +
-                            Integer.toString(j) + ")";
+                            j + ")";
                     this.usable = false;
                 }
                 j++;

@@ -269,7 +269,7 @@ public class AdapterRuleList extends CursorAdapter {
             span01_start = startadj_plural.length() - 1;
             span01_end = Integer.toString(multiplier).length() + 1 + period_str.length() + 1;
             ruleastext = ruleastext + startadj_plural +
-                    Integer.toString(multiplier) +
+                    multiplier +
                     " " + period_str;
         } else {
             span01_start = startadj_single.length() -1;

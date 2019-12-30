@@ -461,7 +461,7 @@ public class AdapterRuleToolList extends CursorAdapter{
 
         }
         if (multiplier > 1) {
-            rv = Integer.toString(multiplier) + " " + rv;
+            rv = multiplier + " " + rv;
         }
         return rv;
     }

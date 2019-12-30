@@ -160,12 +160,7 @@ public class DBTrigger {
                         columnlist.append(c.getDBColumnName());
                         sep = ",";
                         if (!c.isDBColumnUsable()) {
-                            messages.append(
-                                    "\nEDBTRG0002 - Invalid Column " +
-                                    c.getDBColumnName() +
-                                    " - Unusable reason(s) are :-" +
-                                    c.getDBColumnProblemMsg()
-                            );
+                            messages.append("\nEDBTRG0002 - Invalid Column ").append(c.getDBColumnName()).append(" - Unusable reason(s) are :-").append(c.getDBColumnProblemMsg());
                             this.usable = false;
                         }
                         boolean in_owning_table = false;
@@ -177,12 +172,7 @@ public class DBTrigger {
                             }
                         }
                         if (!in_owning_table) {
-                            messages.append(
-                                    "\nEDBTRG0003 - Invalid Column " +
-                                    c.getDBColumnName() +
-                                    " - Not in Trigger's Owning Table " +
-                                    trigger_owningtable.getDBTableName()
-                            );
+                            messages.append("\nEDBTRG0003 - Invalid Column ").append(c.getDBColumnName()).append(" - Not in Trigger's Owning Table ").append(trigger_owningtable.getDBTableName());
                             this.usable = false;
                         }
                     }

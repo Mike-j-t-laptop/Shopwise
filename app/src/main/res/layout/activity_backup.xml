@@ -49,8 +49,18 @@
             android:text="@string/restorebutton"/>
         <TextView
             style="@style/inputitemdummy"
-            android:layout_weight="38.5"
+            android:layout_weight="2"
             />
+        <TextView
+            android:id="@+id/backup_reorgbutton"
+            style="@style/actionbutton"
+            android:layout_weight="18.5"
+            android:text="@string/reorgbutton"/>
+        <TextView
+            style="@style/inputitemdummy"
+            android:layout_weight="20"
+            />
+
     </LinearLayout>
     <LinearLayout
         style="@style/standard_linearlayout">

@@ -95,7 +95,7 @@ public class DBRuleMethods {
                 filter,
                 order
         );
-        logmsg = "Returnig Cursor with " + Integer.toString(rv.getCount()) + " rows.";
+        logmsg = "Returnig Cursor with " + rv.getCount() + " rows.";
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,logmsg,THISCLASS,methodname);
         return rv;
@@ -150,7 +150,7 @@ public class DBRuleMethods {
             lastruleadded = addedid;
             lastruleaddok = true;
         }
-        msg = "Rule " + rulename + " Update=" + Boolean.toString(lastruleaddok);
+        msg = "Rule " + rulename + " Update=" + lastruleaddok;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,msg,THISCLASS,methodname);
     }
@@ -169,14 +169,14 @@ public class DBRuleMethods {
                 LOGTAG,msg,THISCLASS,methodname);
         Cursor rv;
         String filter = DBRulesTableConstants.RULES_ID_COL_FULL +
-                " = " + Long.toString(ruleid) +
+                " = " + ruleid +
                 SQLENDSTATEMENT;
          rv = DBCommonMethods.getTableRows(db,
                 DBRulesTableConstants.RULES_TABLE,
                 filter,
                 ""
         );
-        msg = "Return Cursor with" + Integer.toString(rv.getCount()) + "rowws.";
+        msg = "Return Cursor with" + rv.getCount() + "rowws.";
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,msg,THISCLASS,methodname);
         return rv;
@@ -200,8 +200,8 @@ public class DBRuleMethods {
             rv = true;
         }
         csr.close();
-        msg = "Rule ID=" + Long.toString(ruleid) +
-                " Found=" + Boolean.toString(rv);
+        msg = "Rule ID=" + ruleid +
+                " Found=" + rv;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,msg,THISCLASS,methodname);
         return rv;
@@ -247,7 +247,7 @@ public class DBRuleMethods {
         Cursor csr = getRule(ruleid);
         if (csr.getCount() < 1) {
             csr.close();
-            msg = "Rule=" + rulename + " ID=" + Long.toString(ruleid) + " not found.";
+            msg = "Rule=" + rulename + " ID=" + ruleid + " not found.";
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                     LOGTAG,msg,THISCLASS,methodname);
             return;
@@ -278,7 +278,7 @@ public class DBRuleMethods {
             csr.close();
         } else {
             csr.close();
-            msg = "Rule=" + rulename + " ID=" + Long.toString(ruleid) +
+            msg = "Rule=" + rulename + " ID=" + ruleid +
                     " not found. Not Updated.";
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                     LOGTAG,msg,THISCLASS,methodname);
@@ -313,7 +313,7 @@ public class DBRuleMethods {
         }
 
         if (updatecount < 1) {
-            msg = "Rule=" + rulename + " ID=" + Long.toString(ruleid) +
+            msg = "Rule=" + rulename + " ID=" + ruleid +
                     " no updates to do. Not Updated.";
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                     LOGTAG,msg,THISCLASS,methodname);
@@ -323,8 +323,8 @@ public class DBRuleMethods {
         String whereclause = DBRulesTableConstants.RULES_ID_COL + " = ?";
         updatedcount = db.update(DBRulesTableConstants.RULES_TABLE,
                 cv,whereclause,whereargs);
-        msg = "Rule=" + rulename + " ID=" + Long.toString(ruleid) +
-                " Updated=" + Boolean.toString(updatedcount > 0);
+        msg = "Rule=" + rulename + " ID=" + ruleid +
+                " Updated=" + (updatedcount > 0);
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,msg,THISCLASS,methodname);
     }
@@ -394,7 +394,7 @@ public class DBRuleMethods {
         }
         sql = sql + SQLENDSTATEMENT;
         rv =  db.rawQuery(sql,null);
-        msg = "Rules Extracted=" + Integer.toString(rv.getCount());
+        msg = "Rules Extracted=" + rv.getCount();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,msg,THISCLASS,methodname);
         return rv;
@@ -416,13 +416,13 @@ public class DBRuleMethods {
         Cursor rv;
         filter = DBRulesTableConstants.RULES_ACTON_COL +
                 " <= " +
-                Long.toString(getDateTimeOfAllofToday()) +
+                getDateTimeOfAllofToday() +
                 SQLAND +
                 DBRulesTableConstants.RULES_PROMPT_COL +
                 " >= 1 ";
 
         rv = getExpandedRuleList(filter,orderby);
-        msg = "Prompted Rules Extracted=" + Integer.toString(rv.getCount());
+        msg = "Prompted Rules Extracted=" + rv.getCount();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,msg,THISCLASS,methodname);
         return rv;
@@ -442,7 +442,7 @@ public class DBRuleMethods {
 
         if (!doesRuleExistbyRuleid(ruleid)) {
             msg = "Prompted Rule ID=" +
-                    Long.toString(ruleid) + " Not Found. Not Updated.";
+                    ruleid + " Not Found. Not Updated.";
             LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                     LOGTAG,msg,THISCLASS,methodname);
             return;
@@ -487,7 +487,7 @@ public class DBRuleMethods {
 
         }
         adjustActOnDate(ruleid, actondate, period, multiplier);
-        msg = "Prompted Rule ID+" + Long.toString(ruleid) +
+        msg = "Prompted Rule ID+" + ruleid +
                 "Applied and Adjusted";
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,msg,THISCLASS,methodname);
@@ -509,7 +509,7 @@ public class DBRuleMethods {
 
         String filter = DBRulesTableConstants.RULES_ACTON_COL +
                 " <= " +
-                Long.toString(getDateTimeOfAllofToday()) +
+                getDateTimeOfAllofToday() +
                 SQLAND +
                 DBRulesTableConstants.RULES_PROMPT_COL +
                 " = 0 ";
@@ -556,7 +556,7 @@ public class DBRuleMethods {
             csr.close();
         }
         msg = "Rule applied to the ShoppingList=" +
-                Integer.toString(rulesaddedcount);
+                rulesaddedcount;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,
                 LOGTAG,msg,THISCLASS,methodname);
         return rulesaddedcount;
@@ -581,7 +581,7 @@ public class DBRuleMethods {
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
 
         Cursor rv;
-        String columns[] = new String[] {
+        String[] columns = new String[]{
                 "0 " + SQLAS + SQLSTD_ID,
                 DBProductusageTableConstants.PRODUCTUSAGE_PRODUCTREF_COL,
                 DBProductusageTableConstants.PRODUCTUSAGE_AISLEREF_COL,
@@ -661,16 +661,16 @@ public class DBRuleMethods {
         String whereclause = ruleexistoption +
                 SQLAND +
                 "(" + DBConstants.CALCULATED_RULEPERIODINDAYS + " - " +
-                Integer.toString(minimumruleperiodindays) +
+                minimumruleperiodindays +
                 ") >= 0" +
                 SQLAND +
-                DBProductusageTableConstants.PRODUCTUSAGE_BUYCOUNT_COL + " >= " + Integer.toString(minimumbuycount);
+                DBProductusageTableConstants.PRODUCTUSAGE_BUYCOUNT_COL + " >= " + minimumbuycount;
         if (filter.length() > 0) {
             whereclause = whereclause + SQLAND + filter;
         }
         rv =  db.query(DBProductusageTableConstants.PRODUCTUSAGE_TABLE + joinclauses,
                 columns,whereclause,null,null,null,orderby);
-        msg = "Returning Cursor Rules=" + Integer.toString(rv.getCount());
+        msg = "Returning Cursor Rules=" + rv.getCount();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;
     }
@@ -749,12 +749,12 @@ public class DBRuleMethods {
         ContentValues cv = new ContentValues();
         cv.put(DBRulesTableConstants.RULES_ACTON_COL,newdate);
         String whereclause = DBRulesTableConstants.RULES_ID_COL_FULL + " = ?";
-        String whereargs[] = new String[] { Long.toString(ruleid)};
+        String[] whereargs = new String[]{Long.toString(ruleid)};
         updatecount = db.update(DBRulesTableConstants.RULES_TABLE,cv,whereclause,whereargs);
-        msg = "Rule ID=" + Long.toString(ruleid) +
-                " Update=" + Boolean.toString(updatecount > 0) +
+        msg = "Rule ID=" + ruleid +
+                " Update=" + (updatecount > 0) +
                 " New Date=" + sdf.format(newdate) +
-                " as long=" + Long.toString(newdate) ;
+                " as long=" + newdate;
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
     }
 
@@ -772,10 +772,10 @@ public class DBRuleMethods {
         ArrayList<String> rv = new ArrayList<>();
 
         String rlfilter = DBRulesTableConstants.RULES_AISLEREF_COL_FULL +
-                " = " + Long.toString(aisleid) +
+                " = " + aisleid +
                 " AND " +
                 DBRulesTableConstants.RULES_PRODUCTREF_COL_FULL +
-                " = " + Long.toString(productid);
+                " = " + productid;
         Cursor rlcsr = getExpandedRuleList(rlfilter,"");
         if (rlcsr.getCount() > 0 ) {
             while (rlcsr.moveToNext()) {
@@ -815,14 +815,14 @@ public class DBRuleMethods {
 
         int deletecount = 0;
         if (doesRuleExistbyRuleid(ruleid)) {
-            String whereargs[] = {Long.toString(ruleid)};
+            String[] whereargs = {Long.toString(ruleid)};
             deletecount = db.delete(
                     DBRulesTableConstants.RULES_TABLE,
                     DBRulesTableConstants.RULES_ID_COL + " = ?",whereargs
             );
         }
-        msg = "Rule ID=" + Long.toString(ruleid) +
-                " Deleted=" + Boolean.toString(deletecount > 0);
+        msg = "Rule ID=" + ruleid +
+                " Deleted=" + (deletecount > 0);
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
     }
 }

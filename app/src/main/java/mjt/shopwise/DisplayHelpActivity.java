@@ -35,8 +35,8 @@ public class DisplayHelpActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_displayhelp);
-        outermost = (LinearLayout) this.findViewById(R.id.outermost);
-        hlv = (ListView) this.findViewById(R.id.helptextlist);
+        outermost = this.findViewById(R.id.outermost);
+        hlv = this.findViewById(R.id.helptextlist);
 
         basecolour = this.getIntent().getIntExtra(INTENTKEY_COLOUR,0xffffffff);
         backcolour = this.getIntent().getIntExtra(INTENTKEY_BACKGROUND,0xccffffff);

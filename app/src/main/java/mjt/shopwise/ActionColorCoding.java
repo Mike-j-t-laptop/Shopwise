@@ -97,8 +97,8 @@ class ActionColorCoding {
         String sqlstr;
         if (loadedcounts.getInt1() != dfltcounts.getInt1()) {
             String msg = "Loaded/Default Primary Colors mismatch." +
-                    " Loaded=" + Integer.toString(loadedcounts.getInt1()) +
-                    " Default=" + Integer.toString(dfltcounts.getInt1());
+                    " Loaded=" + loadedcounts.getInt1() +
+                    " Default=" + dfltcounts.getInt1();
             LogMsg.LogMsg(LogMsg.LOGTYPE_WARNING,LOGTAG,msg,THISCLASS,methodname);
             sqlstr = "DELETE FROM " +
                     DBAppvaluesTableConstants.APPVALUES_TABLE +
@@ -112,8 +112,8 @@ class ActionColorCoding {
         }
         if (loadedcounts.getInt2() != dfltcounts.getInt2()) {
             String msg = "Loaded/Default AllColors mismatch." +
-                    " Loaded=" + Integer.toString(loadedcounts.getInt2()) +
-                    " Default=" + Integer.toString(dfltcounts.getInt2());
+                    " Loaded=" + loadedcounts.getInt2() +
+                    " Default=" + dfltcounts.getInt2();
             LogMsg.LogMsg(LogMsg.LOGTYPE_WARNING,LOGTAG,msg,THISCLASS,methodname);
             sqlstr = "DELETE FROM " +
                     DBAppvaluesTableConstants.APPVALUES_TABLE +
@@ -581,9 +581,9 @@ class ActionColorCoding {
         allcolors = iac;
         colorsloaded = true;
         String msg = "Loaded " +
-                Integer.toString(primarycolors.length) +
+                primarycolors.length +
                 " primary colours and " +
-                Integer.toString(allcolors.length) +
+                allcolors.length +
                 " totalcolors.";
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,msg,THISCLASS,methodname);
         return rv;

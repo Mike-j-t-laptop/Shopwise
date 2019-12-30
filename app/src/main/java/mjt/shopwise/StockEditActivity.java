@@ -351,24 +351,20 @@ public class StockEditActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuitem) {
         int menuitemid = menuitem.getItemId();
-        switch (menuitemid) {
-            case R.id.actionhelp:
-                //new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
-                new DisplayHelp(this,
-                        getResources().getString(
-                                R.string.title_help_stockedit_activity),
-                        R.array.help_stockedit_activty,
-                        85,
-                        true,
-                        primary_color,
-                        0xbbffffff,
-                        22f,
-                        16f,
-                        12
-                );
-                return true;
-            default:
-                break;
+        if (menuitemid == R.id.actionhelp) {//new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
+            new DisplayHelp(this,
+                    getResources().getString(
+                            R.string.title_help_stockedit_activity),
+                    R.array.help_stockedit_activty,
+                    85,
+                    true,
+                    primary_color,
+                    0xbbffffff,
+                    22f,
+                    16f,
+                    12
+            );
+            return true;
         }
         return  onOptionsItemSelected(menuitem);
     }
@@ -488,9 +484,9 @@ public class StockEditActivity extends AppCompatActivity {
         String logmsg = "Invoked";
         String methodname = new Object(){}.getClass().getEnclosingMethod().getName();
         LogMsg.LogMsg(LogMsg.LOGTYPE_INFORMATIONAL,LOGTAG,logmsg,THISCLASS,methodname);
-        stockfilter = AISLEREF_COLUMN + " = " + Long.toString(currentaisleid) +
+        stockfilter = AISLEREF_COLUMN + " = " + currentaisleid +
                 " AND " +
-                PRODUCTREF_COLUMN + " = " + Long.toString(currentproductid);
+                PRODUCTREF_COLUMN + " = " + currentproductid;
         stockedcursor = dbpumethods.getExpandedProductUsages(stockfilter,stockorderby);
         if (stockedcursor.getCount() > 0) {
             stockedcursor.moveToFirst();

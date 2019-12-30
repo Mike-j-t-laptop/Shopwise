@@ -66,17 +66,17 @@ public class AdapterDisplayHelpListView extends BaseAdapter {
             convertview = inflater.inflate(R.layout.helplistviewitem,null);
         }
 
-        TextView heading = (TextView) convertview.findViewById(
+        TextView heading = convertview.findViewById(
                 R.id.helpviewlist_heading
         );
 
-        TextView normal = (TextView) convertview.findViewById(
+        TextView normal = convertview.findViewById(
                 R.id.helpviewlist_normal
         );
-        TextView tab1 = (TextView) convertview.findViewById(
+        TextView tab1 = convertview.findViewById(
                 R.id.helpviewlist_tab1
         );
-        TextView tab2 = (TextView) convertview.findViewById(
+        TextView tab2 = convertview.findViewById(
                 R.id.helpviewlist_tab2
         );
 

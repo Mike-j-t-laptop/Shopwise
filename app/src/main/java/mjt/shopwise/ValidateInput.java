@@ -46,9 +46,9 @@ public class ValidateInput {
         if (value < lowest || value > highest) {
             retmsg.setAll(true,2,
                     "Invalid Integer - Out of Range (" +
-                            Integer.toString(lowest) +
+                            lowest +
                             " to " +
-                            Integer.toString(highest) +
+                            highest +
                             ")"
             );
         }
@@ -64,7 +64,7 @@ public class ValidateInput {
     public static Emsg validateMonetary(String monetarytocheck) {
         Emsg retmsg = new Emsg(false, 0, "");
 
-        String amnts[] = monetarytocheck.split(".");
+        String[] amnts = monetarytocheck.split(".");
         if(amnts.length > 1) {
             retmsg.setAll(true, 1, "Invalid Monetary Number - More than 1 decimal point.");
             return retmsg;
@@ -101,7 +101,7 @@ public class ValidateInput {
         int yearasint;
 
         int partcount = 0;
-        String dateparts[] = datetocheck.split("/");
+        String[] dateparts = datetocheck.split("/");
         for(String cpart: dateparts) {
             partcount++;
             switch (partcount) {

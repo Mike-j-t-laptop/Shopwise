@@ -670,9 +670,7 @@ public class DBDatabase {
         String child_type = "Unknown";
         Log.d("DEPENDENCYINFO",
                 "Number of Dependencies is " +
-                        String.valueOf(
-                                dependencies.size()+1
-                        )
+                        (dependencies.size() + 1)
         );
         for (DBDependency d: dependencies
              ) {

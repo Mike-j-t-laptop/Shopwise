@@ -129,13 +129,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        /**
+        /*
          * !!!! IMPORTANT  !!!!
          * DataBinding is only available if turned on the in build.gradle (Module: app) using :-
          *
          *     dataBinding {
          *         enabled = true
          *     }
+         *
          */
         DataBindingUtil.setContentView(this,R.layout.activity_main);
 
@@ -189,24 +190,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuitem) {
         int menuitemid = menuitem.getItemId();
-        switch (menuitemid) {
-            case R.id.actionhelp:
-                //new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
-                new DisplayHelp(this,
-                        getResources().getString(
-                                R.string.title_help_main_activity),
-                        R.array.help_main_activity,
-                        85,
-                        true,
-                        0xff0000ff,
-                        0xbbffffff,
-                        22f,
-                        16f,
-                        12
-                );
-                return true;
-            default:
-                break;
+        if (menuitemid == R.id.actionhelp) {//new DisplayHelp(this,"ALt Title",R.array.help_main_activity,80,true,0xffff0000, 0xbbffffff,20f,16f,12);
+            new DisplayHelp(this,
+                    getResources().getString(
+                            R.string.title_help_main_activity),
+                    R.array.help_main_activity,
+                    85,
+                    true,
+                    0xff0000ff,
+                    0xbbffffff,
+                    22f,
+                    16f,
+                    12
+            );
+            return true;
         }
         return  onOptionsItemSelected(menuitem);
     }
@@ -462,7 +459,7 @@ public class MainActivity extends AppCompatActivity {
                         MAINACTIVITYOPTIONLIST[i].getmMenuOptionInfo());
                 cv.put(DBAppvaluesTableConstants.APPVALUES_INT_COL,
                         MAINACTIVITYOPTIONLIST[i].getmMenuOptionOrder());
-                String whereargs[] = { MENUOPTIONS,
+                String[] whereargs = {MENUOPTIONS,
                         MAINACTIVITYOPTIONLIST[i].getMenuOptionName()
                 };
                 String whereclause = DBAppvaluesTableConstants.APPVALUES_NAME_COL +
