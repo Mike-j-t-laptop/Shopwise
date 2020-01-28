@@ -805,6 +805,7 @@ public class BackupActivity extends AppCompatActivity implements BackupActivityI
     private boolean doVacuum() {
         DBDAO dbdao = new DBDAO(context);
         SQLiteDatabase db = dbdao.getDb();
+        db.execSQL("ANALYZE");
         db.execSQL("VACUUM");
         return true;
     }
