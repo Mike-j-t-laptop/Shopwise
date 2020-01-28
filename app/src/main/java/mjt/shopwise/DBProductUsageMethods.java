@@ -351,6 +351,12 @@ class DBProductUsageMethods {
             sql = sql + SQLORDERBY +
                     DBStorageTableConstants.STORAGE_ORDER_COL_FULL +
                     SQLORDERASCENDING + ", " +
+                    /**
+                     * 2020/01/29 Introduced new 2nd sort order item, Product Id
+                     * so as to align the same product (different shop)
+                     */
+                    DBProductsTableConstants.PRODUCTS_ID_COL_FULL +
+                    SQLORDERASCENDING + ", " +
                     DBProductsTableConstants.PRODUCTS_STORAGEORDER_COL_FULL +
                     SQLORDERASCENDING;
         }
